@@ -5,14 +5,19 @@ public class Dict {
     Item data;      //节点数据内容
     int n;          //链表长度
     Node endNode;   //末尾节点
+    History history_list_first ; // 历史记录节点
     /*
     *  字典初始化
     * */
     public Dict(){
         this.data = null;
     }
+
+
     /*
+    *
     * 加载单词,存入单链表，排序后结果
+    *
     * */
     public int load(String formName){
         first = null;
@@ -50,24 +55,18 @@ public class Dict {
         this.dict_sort();
         return 0;
     }
+
     /*
     *
     * 查找单词
     *
     * */
-    public String find(String english,String toFile){
+    public String find(String english){
         Node p = first;
-        File f = new File(toFile);
-        try {
-            FileWriter fw = new FileWriter(f,true);
-            BufferedWriter bw = new BufferedWriter(fw);
-
-            bw.write(english+"\n");
-
-            bw.close();
-        } catch (IOException e) {
-            System.out.println("存储搜索历史失败");
-        }
+        History h_r;   //历史记录头节点
+        h_r = new History(english);
+        h_r.next = history_list_first;
+        history_list_first = h_r;
 
         while (p!=null){
             if(p.data.eng.compareTo(english) == 0){
@@ -92,6 +91,8 @@ public class Dict {
         }
         System.out.println();
     }
+
+
 
     /*
     *
@@ -153,18 +154,13 @@ public class Dict {
     *
     * */
 
-    public int showHist(String fromName){
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(fromName));
-            String s;
-            while ((s=br.readLine())!=null){
-                System.out.println(s);
-            }
-        }catch (IOException ex){
-            return -1;
+    int history_list_show(){
+        History p=history_list_first;
+        while (p!=null){
+            System.out.println(p.history_item);
+            p = p.next;
         }
-
-
+        System.out.println();
         return 0;
     }
 

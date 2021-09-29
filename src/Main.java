@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
-        String BaseUrl = "C:\\Users\\Lenovo\\Desktop\\BaseSingleListDict\\data\\";
+        String BaseUrl = "C:\\Users\\Lenovo\\Desktop\\数据结构\\BaseSingleListDict\\data\\";
         String pathCet4word =  BaseUrl + "cet4word.txt";
         Dict l1 = new Dict();
         int load = l1.load(pathCet4word);
@@ -42,7 +42,7 @@ public class Main {
                     case 2:
                         System.out.print("请输入您要查询的单词: ");
                         String findValue = scan.next();
-                        System.out.println("单词的意思是:  "+l1.find(findValue,BaseUrl+"history.txt"));
+                        System.out.println("单词的意思是:  "+l1.find(findValue));
                         break;
 
                     case 3:
@@ -71,7 +71,7 @@ public class Main {
 
                     case 5:
                         System.out.println("您搜索过的历史记录为:");
-                        int showHistValue = l1.showHist(BaseUrl+"history.txt");
+                        int showHistValue = l1.history_list_show();
                         if(showHistValue == 0){
                             System.out.println("查询成功");
                         }
